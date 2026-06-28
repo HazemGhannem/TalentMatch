@@ -1,3 +1,4 @@
+import Navbar from '@/components/ui/Navbar';
 import './globals.css';
 
 export const metadata = {
@@ -26,12 +27,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <nav className="navbar">
-          <a href="/" className="navbar-logo">
-            <span className="navbar-logo-icon">CV</span>
-            CV Matcher
-          </a>
-        </nav>
+        <Navbar />
         {children}
       </body>
     </html>

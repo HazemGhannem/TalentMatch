@@ -4,8 +4,15 @@ import JobDescriptionInput from '@/components/input/JobDescriptionInput';
 import CVUpload from '@/components/input/CVUpload';
 import Button from '@/components/ui/Button';
 import NoAnalysis from '@/components/NoAnalysis';
-import ResultsPanel from '@/components/results/ResultsPanel';
 import { useAnalysis } from '@/hooks/useAnalysis';
+import dynamic from 'next/dynamic';
+
+const ResultsPanel = dynamic(
+  () => import('@/components/results/ResultsPanel'),
+  {
+    ssr: false,
+  },
+);
 
 export default function Page() {
   const {
@@ -42,7 +49,6 @@ export default function Page() {
           disabled={status === 'analyzing'}
           error={uploadError}
         />
-
         <Button
           onClick={analyze}
           disabled={!canAnalyze}
