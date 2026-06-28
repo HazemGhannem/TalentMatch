@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TalentMatch
 
-## Getting Started
+AI-powered CV and job match analyzer. Paste a job description, upload your CV, and get a match score, strengths, gaps, an apply recommendation, and a fully rewritten CV — in under ten seconds.
 
-First, run the development server:
+## What it does
+
+- **Match scoring** — Gemini 2.5 Flash compares your CV against the job description and returns a score from 0 to 100
+- **Apply recommendation** — predicts whether the role is worth applying for based on overall fit
+- **Strengths & gaps** — specific bullet points on what your CV covers well and what it's missing
+- **CV rewriter** — restructures and rephrases your CV to target the role, with layout selection (Modern, Classic, Minimal, Tech)
+- **PDF export** — one-click download with clean typography and proper page-break handling
+
+## Tech stack
+
+- Next.js 15 (App Router)
+- Google Gemini 2.5 Flash — structured JSON output via `responseSchema`
+- TypeScript
+- jsPDF
+- react-circular-progressbar
+- Tailwind CSS
+
+## Getting started
+
+```bash
+npm install
+```
+
+Copy the example env file and add your Gemini API key:
+
+```bash
+cp .env.example .env.local
+```
+
+```env
+GEMINI_API_KEY=your_key_here
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+app/
 
-## Learn More
+api/analyze/     → POST endpoint — parses CV, calls Gemini, returns structured result
 
-To learn more about Next.js, take a look at the following resources:
+page.tsx         → main page
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+components/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+input/           → JobDescriptionInput, CVUpload
 
-## Deploy on Vercel
+results/         → ResultsPanel, ScoreCard, StrengthsList, GapsList, RewrittenCV
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ui/              → Button, Navbar
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+hooks/
+
+useAnalysis.ts   → all fetch logic and state, extracted from the page
+
+lib/
+
+gemini.ts        → Gemini client, prompt builder, response schema
+
+downloadCV.ts    → jsPDF generation
+
+types.ts         → shared TypeScript types
+
+## Links
+
+- [Live demo](https://your-live-url.vercel.app)
+- [LinkedIn](https://www.linkedin.com/in/hazem-ghannem-6058b71a6/)
