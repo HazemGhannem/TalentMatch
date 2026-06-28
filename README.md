@@ -73,5 +73,5 @@ types.ts         → shared TypeScript types
 
 ## Links
 
-- [Live demo](https://your-live-url.vercel.app)
+- [Live demo](https://talent-match-omega.vercel.app/)
 - [LinkedIn](https://www.linkedin.com/in/hazem-ghannem-6058b71a6/)
